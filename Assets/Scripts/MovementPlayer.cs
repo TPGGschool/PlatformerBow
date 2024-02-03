@@ -7,13 +7,18 @@ public class MovementPlayer : MonoBehaviour
     // variables generales del script
     private float MoveSpeed;
     [SerializeField]
-    private Rigidbody2D rbPlayer;
     private SpriteRenderer Sprite;
+    private Rigidbody2D rbPlayer;
+    private float JumpForce = 5;
+    private bool InFloor;
+    int Jumps = 2;
 
     void Start()
     {
         // getcomponents abajo
         Sprite = gameObject.GetComponent<SpriteRenderer>();
+
+        rbPlayer = gameObject.GetComponent<Rigidbody2D>();
 
 
     }
@@ -21,6 +26,7 @@ public class MovementPlayer : MonoBehaviour
     void Update()
     {
         Movimiento();
+        Jump();
 
     }
 
@@ -35,9 +41,9 @@ public class MovementPlayer : MonoBehaviour
         // sprint
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            MoveSpeed = 4000;
+            MoveSpeed = 45000;
         }
-        else MoveSpeed = 2500;
+        else MoveSpeed = 22500;
 
         // voltear sprite
         if (Move.x < 0)
@@ -48,8 +54,24 @@ public class MovementPlayer : MonoBehaviour
         {
             Sprite.flipX = false;
         }
+    }
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && Jumps < 2) 
+        {
+            rbPlayer.velocity = new Vector2(rbPlayer.velocity.x,JumpForce);
+            Jumps++;
 
+        }
+    }
+     void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Floor"))
+        {
+            Jumps = 0;
 
-
+        }
+     
+        
     }
 }
