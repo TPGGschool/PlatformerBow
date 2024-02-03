@@ -2178,7 +2178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b3e25ef09b8e94aa3993a8f7b81622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rbPabloElFlaco: {fileID: 1865413107}
+  rbPlayer: {fileID: 1865413107}
 --- !u!1 &1867336269
 GameObject:
   m_ObjectHideFlags: 0
