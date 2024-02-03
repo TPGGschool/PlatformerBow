@@ -2040,9 +2040,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1865413109}
+  - component: {fileID: 1865413111}
   - component: {fileID: 1865413108}
   - component: {fileID: 1865413107}
-  - component: {fileID: 1865413111}
   - component: {fileID: 1865413110}
   m_Layer: 0
   m_Name: Player
@@ -2175,11 +2175,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1865413106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a49b5241cdcce540969437efb015403, type: 3}
+  m_Script: {fileID: 11500000, guid: e7b3e25ef09b8e94aa3993a8f7b81622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb2d: {fileID: 1865413107}
-  sprite: {fileID: 1865413108}
+  rbPabloElFlaco: {fileID: 1865413107}
 --- !u!1 &1867336269
 GameObject:
   m_ObjectHideFlags: 0
