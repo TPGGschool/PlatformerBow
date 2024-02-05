@@ -72,6 +72,7 @@ public class MovementPlayer : MonoBehaviour
         {
             rbPlayer.velocity = new Vector2(rbPlayer.velocity.x,JumpForce);
             Jumps++;
+            animator.SetBool("IsJumping", true);
 
         }
     }
@@ -90,6 +91,8 @@ public class MovementPlayer : MonoBehaviour
             if (Vector2.Angle(collision.GetContact(0).normal, Vector2.up) < 45)
             {
                 Jumps = 0;
+                animator.SetBool("IsJumping", false);
+
             }
 
         }
