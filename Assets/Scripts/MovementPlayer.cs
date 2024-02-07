@@ -84,6 +84,7 @@ public class MovementPlayer : MonoBehaviour
         {
 
 
+            // esto es para que el salto solo se resetee cuando toca el suelo, y no una pared, techo etc...
             // Aquí se utiliza un condicional para verificar el ángulo entre la normal de la colisión y el vector hacia arriba (Vector2.up).
             // La normal es un vector perpendicular a la superficie de colisión. 
             // Este condicional verifica si el ángulo entre la normal y el vector hacia arriba es menor a 45 grados.
