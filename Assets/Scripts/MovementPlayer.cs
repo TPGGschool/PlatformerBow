@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class MovementPlayer : MonoBehaviour
@@ -24,19 +25,21 @@ public class MovementPlayer : MonoBehaviour
 
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         Movimiento();
         Jump();
+        
+    }
+    void Update()
+    {
 
     }
-
     private void Movimiento()
     {
         // definicion de varialbles
-        float dt = Time.deltaTime;
-        float HiInput = Input.GetAxisRaw("Horizontal");
-        Vector2 Move = new Vector2(HiInput * MoveSpeed * dt, rbPlayer.velocity.y);
+        float HiInput = Input.GetAxisRaw("Horizontal" ) * Time.deltaTime;
+        Vector2 Move = new Vector2(HiInput * MoveSpeed * Time.deltaTime, rbPlayer.velocity.y);
         rbPlayer.velocity = Move;
 
         // sprint
