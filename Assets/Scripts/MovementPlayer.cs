@@ -14,6 +14,7 @@ public class MovementPlayer : MonoBehaviour
     int Jumps = 2;
     private Animator animator;
 
+
     void Start()
     {
         // getcomponents abajo
@@ -73,7 +74,7 @@ public class MovementPlayer : MonoBehaviour
         // salto
         if (Input.GetKeyDown(KeyCode.Space) && Jumps < 2) 
         {
-            rbPlayer.velocity = new Vector2(rbPlayer.velocity.x,JumpForce);
+                rbPlayer.velocity = new Vector2(rbPlayer.velocity.x,JumpForce);
             Jumps++;
             animator.SetBool("IsJumping", true);
 
@@ -84,7 +85,7 @@ public class MovementPlayer : MonoBehaviour
 
         // resetear salto
         if (collision.collider.CompareTag("Floor"))
-        {
+            {
 
 
             // esto es para que el salto solo se resetee cuando toca el suelo, y no una pared, techo etc...
