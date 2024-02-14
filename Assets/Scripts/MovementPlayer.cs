@@ -10,7 +10,7 @@ public class MovementPlayer : MonoBehaviour
     [SerializeField]
     private SpriteRenderer Sprite;
     private Rigidbody2D rbPlayer;
-    public float JumpForce = 6;
+    public float JumpForce = 8;
     int Jumps = 2;
     private Animator animator;
 
@@ -72,14 +72,18 @@ public class MovementPlayer : MonoBehaviour
     private void Jump()
     {
         // salto
-        if (Input.GetKeyDown(KeyCode.Space) && Jumps < 2)
+        if (Input.GetKeyDown(KeyCode.Space) && Jumps > 1)
         {
             rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, JumpForce);
-            Jumps++;
+            Jumps--;
             animator.SetBool("IsJumping", true);
+            
 
         }
     }
+
+
+    
     void OnCollisionStay2D(Collision2D collision)
     {
 
@@ -93,15 +97,21 @@ public class MovementPlayer : MonoBehaviour
             // La normal es un vector perpendicular a la superficie de colisión. 
             // Este condicional verifica si el ángulo entre la normal y el vector hacia arriba es menor a 45 grados.
             // conseguido de stack overflow de usuario "Voidsay"
-            if (Vector2.Angle(collision.GetContact(0).normal, Vector2.up) < 45)
+           
+            // revisar todos los puntos de contacto
+            foreach (ContactPoint2D contact in collision.contacts)
             {
-                Jumps = 0;
-                animator.SetBool("IsJumping", false);
-
+                if (Vector2.Angle(contact.normal, Vector2.up) < 45)
+                {
+                    Jumps = 2;
+                    animator.SetBool("IsJumping", false);
+                   
+                }
             }
-
         }
 
-
     }
+    
+
+
 }
