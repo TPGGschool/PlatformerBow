@@ -6,11 +6,11 @@ using UnityEngine;
 public class MovementPlayer : MonoBehaviour
 {
     // variables generales del script
-    private float MoveSpeed = 35000;
+    private float MoveSpeed = 20000;
     [SerializeField]
     private SpriteRenderer Sprite;
     private Rigidbody2D rbPlayer;
-    private float JumpForce = 6;
+    public float JumpForce = 6;
     int Jumps = 2;
     private Animator animator;
 
@@ -46,12 +46,12 @@ public class MovementPlayer : MonoBehaviour
         // sprint
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            MoveSpeed = 70000;
+            MoveSpeed = 40000;
             animator.SetBool("IsRuning", true);
         }
         else
         {
-            MoveSpeed = 35000;
+            MoveSpeed = 20000;
             animator.SetBool("IsRuning", false);
         }
 
