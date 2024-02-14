@@ -30,7 +30,7 @@ public class MovementPlayer : MonoBehaviour
     {
         Movimiento();
         Jump();
-        
+
     }
     void Update()
     {
@@ -39,7 +39,7 @@ public class MovementPlayer : MonoBehaviour
     private void Movimiento()
     {
         // definicion de varialbles
-        float HiInput = Input.GetAxisRaw("Horizontal" ) * Time.deltaTime;
+        float HiInput = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
         Vector2 Move = new Vector2(HiInput * MoveSpeed * Time.deltaTime, rbPlayer.velocity.y);
         rbPlayer.velocity = Move;
 
@@ -72,20 +72,20 @@ public class MovementPlayer : MonoBehaviour
     private void Jump()
     {
         // salto
-        if (Input.GetKeyDown(KeyCode.Space) && Jumps < 2) 
+        if (Input.GetKeyDown(KeyCode.Space) && Jumps < 2)
         {
-                rbPlayer.velocity = new Vector2(rbPlayer.velocity.x,JumpForce);
+            rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, JumpForce);
             Jumps++;
             animator.SetBool("IsJumping", true);
 
         }
     }
-     void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
 
         // resetear salto
         if (collision.collider.CompareTag("Floor"))
-            {
+        {
 
 
             // esto es para que el salto solo se resetee cuando toca el suelo, y no una pared, techo etc...
@@ -101,7 +101,7 @@ public class MovementPlayer : MonoBehaviour
             }
 
         }
-     
-        
+
+
     }
 }
