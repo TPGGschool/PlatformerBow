@@ -6,11 +6,11 @@ using UnityEngine;
 public class MovementPlayer : MonoBehaviour
 {
     // variables generales del script
-    private float MoveSpeed = 20000;
+    private float MoveSpeed = 15000;
     [SerializeField]
     private SpriteRenderer Sprite;
     private Rigidbody2D rbPlayer;
-    public float JumpForce = 8;
+    float JumpForce = 6;
     int Jumps = 2;
     private Animator animator;
 
@@ -29,11 +29,12 @@ public class MovementPlayer : MonoBehaviour
     private void FixedUpdate()
     {
         Movimiento();
-        Jump();
 
     }
     void Update()
     {
+        // esto va en fixed update pero por alguna razon me funciona mucho mejor en update (me detecta mejor los inputs)
+        Jump();
 
     }
     private void Movimiento()
@@ -44,14 +45,14 @@ public class MovementPlayer : MonoBehaviour
         rbPlayer.velocity = Move;
 
         // sprint
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && animator.GetBool("IsJumping") == false)
         {
-            MoveSpeed = 40000;
+            MoveSpeed = 30000;
             animator.SetBool("IsRuning", true);
         }
         else
         {
-            MoveSpeed = 20000;
+            MoveSpeed = 15000;
             animator.SetBool("IsRuning", false);
         }
 
@@ -72,18 +73,17 @@ public class MovementPlayer : MonoBehaviour
     private void Jump()
     {
         // salto
-        if (Input.GetKeyDown(KeyCode.Space) && Jumps > 1)
+        if (Input.GetKeyDown(KeyCode.Space) && Jumps > 0)
         {
+
             rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, JumpForce);
             Jumps--;
             animator.SetBool("IsJumping", true);
-            
-
         }
     }
 
 
-    
+    bool hasjumpbeenreseted = false;
     void OnCollisionStay2D(Collision2D collision)
     {
 
@@ -97,21 +97,34 @@ public class MovementPlayer : MonoBehaviour
             // La normal es un vector perpendicular a la superficie de colisión. 
             // Este condicional verifica si el ángulo entre la normal y el vector hacia arriba es menor a 45 grados.
             // conseguido de stack overflow de usuario "Voidsay"
-           
+
             // revisar todos los puntos de contacto
             foreach (ContactPoint2D contact in collision.contacts)
             {
-                if (Vector2.Angle(contact.normal, Vector2.up) < 45)
+                if (Vector2.Angle(contact.normal, Vector2.up) < 45 && !hasjumpbeenreseted)
                 {
                     Jumps = 2;
                     animator.SetBool("IsJumping", false);
-                   
+                    hasjumpbeenreseted = true;
                 }
             }
         }
 
+
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Floor"))
+        {
+            hasjumpbeenreseted = false;
+        }
+    }
+
+
+
+
+
 
 
 }
