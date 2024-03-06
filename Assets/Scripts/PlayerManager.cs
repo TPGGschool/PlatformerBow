@@ -27,6 +27,7 @@ public class PlayerManager : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+       
         if (collision.gameObject.layer == LayerInt)
         {
             if (healthTime > 0)
@@ -39,11 +40,13 @@ public class PlayerManager : MonoBehaviour
                 {
                     isAlive = false;
                     Debug.Log("Perdiste");
-                    PlayerLose();
+                  
                 }
                 healthTime = 0.1f;
             }
         }
+   
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -52,9 +55,18 @@ public class PlayerManager : MonoBehaviour
 
             Debug.Log("Ganaste");
         }
+
+        if (collision.gameObject.tag == "Vida")
+        {
+            if (healthPoints <= 2)
+            {
+                healthPoints++;
+                healthTime = 0.1f;
+                Debug.Log("Vidamas");
+                Destroy(collision.gameObject);
+
+            }
+        }
     }
-    private void PlayerLose()
-    {
-        sprite.color = Color.red;
-    }
+  
 }
