@@ -88,7 +88,7 @@ public class MovementPlayer : MonoBehaviour
     {
 
         // resetear salto
-        if (collision.collider.CompareTag("Floor"))
+        if (collision.collider.CompareTag("Floor") || collision.collider.CompareTag("Die"))
         {
 
 
@@ -115,7 +115,7 @@ public class MovementPlayer : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Floor"))
+        if (collision.collider.CompareTag("Floor") || collision.collider.CompareTag("Die"))
         {
             hasjumpbeenreseted = false;
         }
